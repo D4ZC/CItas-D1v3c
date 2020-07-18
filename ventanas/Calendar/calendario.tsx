@@ -68,9 +68,9 @@ const dias = (dia,item) => {
 }
   return (
     <View style={{flex: 1}}>
-      {/* <Agenda 
-        // items={items}
-        // loadItemsForMonth={loadItems}
+      {/* {/* <Agenda  */}
+        items={items}
+        loadItemsForMonth={loadItems}
         selected={'2020-06-30'}
         // renderItem={renderItem}
         onDayPress={(day)=>{console.log('day pressed')}}

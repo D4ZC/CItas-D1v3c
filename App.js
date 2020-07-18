@@ -9,6 +9,7 @@ import MainTabScreen from './ventanas/MainTabScreen/MainTabScreen';
 import { DrawerContent} from './ventanas/DrawContent/DrawContent';
 import ComentariosScreen from './ventanas/Comentarios/comentario';
 
+import UserState from './context/user/userState';
 import FirebaseState from './context/firebase/firebaseState' ;
 
 const Drawer = createDrawerNavigator();
@@ -17,13 +18,15 @@ const Drawer = createDrawerNavigator();
 function App() {
   return (
     <FirebaseState>
-    <NavigationContainer>
-      <Drawer.Navigator drawerContent = {props => <DrawerContent {... props} />}>
-        <Drawer.Screen name="HomeDrawer" component={MainTabScreen} />
-        <Drawer.Screen name="ComentariosDrawer" component={ComentariosScreen} />
-        {/* <Drawer.Screen name="SoporteScreen" component={SoporteScreen} /> */}
-      </Drawer.Navigator>
-    </NavigationContainer>
+      <UserState>
+        <NavigationContainer>
+          <Drawer.Navigator drawerContent = {props => <DrawerContent {... props} />}>
+            <Drawer.Screen name="HomeDrawer" component={MainTabScreen} />
+            <Drawer.Screen name="ComentariosDrawer" component={ComentariosScreen} />
+            {/* <Drawer.Screen name="SoporteScreen" component={SoporteScreen} /> */}
+          </Drawer.Navigator>
+        </NavigationContainer>
+      </UserState>
     </FirebaseState>
   );
 }

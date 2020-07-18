@@ -102,6 +102,13 @@ const HomeStackScreen = ({navigation}) => (
         fontWeight: 'bold'
       }
     }}>
+       <HomeStack.Screen name="Login" component={Login} options = {{
+        title: 'CITAS DIVEC',
+        headerMode: 'none', 
+        headerShown: false
+
+        
+      }}/>
       <HomeStack.Screen name="Home" component={HomeScreen} options = {{
         title: 'CITAS DIVEC',
         headerLeft: () => (
