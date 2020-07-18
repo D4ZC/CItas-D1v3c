@@ -12,6 +12,7 @@ import HomeScreen from '../HomeScreen/home';
 import DetailsScreen from '../DetailScreen/detail';
 import ExploreScreen from '../ExploreScreen/ExploreScreen';
 import ProfileScreen from '../ProfileScreen/ProfileScreen';
+import CalendarPicker from '../Calendar/CalendarPicker'
 import ComentariosScreen from '../Comentarios/comentario';
 
 // -------------------------Navigator-------------------------------
@@ -53,7 +54,7 @@ const MainTabScreen = () => (
       />
       <Tab.Screen
         name="Profile"
-        component={ProfileScreen}
+        component={CalendarPicker}
         options={{
           tabBarLabel: 'Agendar Cita',
           tabBarColor: '#00897B',

@@ -58,15 +58,27 @@ const Schedule: React.FC = () => {
       </TouchableOpacity>
     );
   };
-
+const dias = (dia,item) => {
+  return (
+    <View style={{height:200,width:'90%',backgroundColor:'green'}}>
+      <Text>Este es el dia</Text>
+      <Text>{dia} - {item}</Text>
+    </View>
+  )
+}
   return (
     <View style={{flex: 1}}>
-      <Agenda 
-        items={items}
-        loadItemsForMonth={loadItems}
+      {/* <Agenda 
+        // items={items}
+        // loadItemsForMonth={loadItems}
         selected={'2020-06-30'}
-        renderItem={renderItem}
-      />
+        // renderItem={renderItem}
+        onDayPress={(day)=>{console.log('day pressed')}}
+        onDayChange={(day)=>{console.log('day changed')}}
+        renderDay={dias}
+        
+        
+      /> */}
     </View>
   );
 };
