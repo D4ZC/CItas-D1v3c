@@ -5,7 +5,7 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import RNPickerSelect from 'react-native-picker-select';
 
 import FirebaseContext from '../../context/firebase/firebaseContext';
-// import UserContext from '../../context/user/userContext'
+import UserContext from '../../context/user/userContext'
 
 import {citasRepetidas} from '../../utils/functions';
 const CalendarPicker = () => {
@@ -16,7 +16,7 @@ const CalendarPicker = () => {
     const [subject,setSubject] = useState('')    
     const [horasItems,setHorasItems] = useState(itemsDefault)
 
-    // const {carrera,nombre,codigo,centro} = useContext(UserContext)
+    const {carrera,nombre,codigo,centro} = useContext(UserContext)
     const {firebase} = useContext(FirebaseContext); 
   
     const showDatePicker = () => {
@@ -59,10 +59,10 @@ const CalendarPicker = () => {
         date,
         time,
         subject,
-        // nombre,
-        // codigo,
-        // centro,
-        // carrera,                
+        nombre,
+        codigo,
+        centro,
+        carrera,                
       }
       
     
@@ -77,7 +77,7 @@ const CalendarPicker = () => {
         .then(refDoc => {
           console.log(`ID Document ${refDoc}`)
         }).catch(error=>{console.log(error)})     
-        console.log(cite)   
+        // console.log(cite)   
       }catch(e){
         console.log(e)
       }
@@ -111,7 +111,7 @@ const CalendarPicker = () => {
         return true
       } )
         setHorasItems(itemsElements)
-        console.log(horasItems)
+        // console.log(horasItems)
     }
 
 
