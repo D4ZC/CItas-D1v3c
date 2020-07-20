@@ -1,13 +1,14 @@
-import React, {useState,useContext} from 'react';
+import React, {useState,useContext} from 'react'; // Hooks para estado y contexto
 import { View, Button, Text, StyleSheet ,Alert} from 'react-native'
 import {TextInput} from 'react-native-paper';
-import DateTimePickerModal from "react-native-modal-datetime-picker";
-import RNPickerSelect from 'react-native-picker-select';
+import DateTimePickerModal from "react-native-modal-datetime-picker"; //comp. para seleccionar dia
+import RNPickerSelect from 'react-native-picker-select'; // comp para seleccionar la hora disponible
 
-import FirebaseContext from '../../context/firebase/firebaseContext';
-import UserContext from '../../context/user/userContext'
+import FirebaseContext from '../../context/firebase/firebaseContext'; // Contexto para acceder a firestore
+import UserContext from '../../context/user/userContext'// contexto para acceder a la info del usuario
 
-import {citasRepetidas} from '../../utils/functions';
+import {citasRepetidas} from '../../utils/functions'; // // Recibe el arreglo de todas las citas de un dia y regresa un arreglo con las horas que ya se han repetido 3 veces
+
 const CalendarPicker = () => {
 
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);    
@@ -16,8 +17,8 @@ const CalendarPicker = () => {
     const [subject,setSubject] = useState('')    
     const [horasItems,setHorasItems] = useState(itemsDefault)
 
-    const {carrera,nombre,codigo,centro} = useContext(UserContext)
-    const {firebase} = useContext(FirebaseContext); 
+    const {carrera,nombre,codigo,centro} = useContext(UserContext) // Obtener los datos del usuario del context
+    const {firebase} = useContext(FirebaseContext); //Obtener las funciones de firebase
   
     const showDatePicker = () => {
       setDatePickerVisibility(true);
@@ -54,6 +55,7 @@ const CalendarPicker = () => {
         return
       }
       const day = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`      
+      //Agregar la fecha seleccionada
       const cita = {
         day,
         date,
@@ -86,9 +88,9 @@ const CalendarPicker = () => {
     //Items del RNPicker Select    
     var itemsElements = { }
     agregarItemsElements =  () => {
-      // const today = new Date() // Obtiene la fecha de hoy
+      
       const todayParse = `${date.getFullYear()}-${(date.getMonth())}-${date.getDate()}` // Parsea la fecha de hoy a cadena: "YYYY-MM-DD"      
-       firebase.db.collection("cita").where("day", "==", todayParse).onSnapshot(manejarSnapshot)
+       firebase.db.collection("cita").where("day", "==", todayParse).onSnapshot(manejarSnapshot) // Traer solo los de la fecha seleccionada
       // .then(c=>console.log(c))
       // .catch(error=>console.log(error))
       
@@ -142,7 +144,6 @@ const CalendarPicker = () => {
         </View>
 
         <View>
-
           <View style={styles.containerDate}>
             { date ? (<Text style={styles.title}>Cita agendada para el dia: </Text>) 
                   : (<Text style={styles.titleNothing}>Aun no se ha seleccionado una fecha</Text>) }
@@ -159,7 +160,8 @@ const CalendarPicker = () => {
             label="Asunto"
             multiline={true}
             numberOfLines={3}
-            placeholder="Titulación"            
+            placeholder="Titulación"
+            // value={subject}
             onChangeText={text=>setSubject(text)}
           />
 

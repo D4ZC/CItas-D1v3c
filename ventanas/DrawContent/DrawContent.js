@@ -16,12 +16,18 @@ import {
     DrawerItem
 } from '@react-navigation/drawer';
 
+import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-community/async-storage';
+
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
 // import{ AuthContext } from '../components/context';
 
 export function DrawerContent(props) {
+
+    const navigation = useNavigation();
+
     const [isDarkTheme, setIsDarkTheme] = React.useState(false);
 
     const toogleTheme = () => {
@@ -30,7 +36,23 @@ export function DrawerContent(props) {
     const paperTheme = useTheme();
 
     // const { signOut, toggleTheme } = React.useContext(AuthContext);
+    const signOut = () =>{
+        elimiinarDatos()
 
+    }
+
+    const elimiinarDatos = async ( ) =>{
+        try {
+          await AsyncStorage.removeItem('user');
+            
+        } catch (error) {
+          console.log(error)
+        }
+        finally{
+            navigation.navigate("Login")
+        }
+        
+      }
     return(
         <View style={{flex:1}}>
             <DrawerContentScrollView {...props}>

@@ -2,6 +2,8 @@ import React,{ useState, useContext} from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, ToastAndroid, Alert,Platform} from 'react-native';
 import { Button }  from 'react-native-paper';
 
+import AsyncStorage from '@react-native-community/async-storage';
+
 import { useNavigation } from '@react-navigation/native';
 import UserContext from '../../context/user/userContext';
 
@@ -80,11 +82,21 @@ export default  Login = () => {
           centro:myArray[3],
           carrera:myArray[4]
       }
-      
+      guardarDatos(user)
       addUser(user)
       navigation.navigate("HomeDrawer")
       //Navegar a la siguiente ventana
       //navigation.navigate("registro")
+    }
+  }
+
+  const guardarDatos = async user => {
+    try {
+      const jsonValue = JSON.stringify(user)
+      await AsyncStorage.setItem('user',jsonValue)      
+      
+    } catch (error) {
+      console.log(error)
     }
   }
 
