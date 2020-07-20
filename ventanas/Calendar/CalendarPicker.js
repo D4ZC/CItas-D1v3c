@@ -160,7 +160,7 @@ const CalendarPicker = () => {
             multiline={true}
             numberOfLines={3}
             placeholder="Titulación"
-            value={subject}
+            // value={subject}
             onChangeText={text=>setSubject(text)}
           />
 
