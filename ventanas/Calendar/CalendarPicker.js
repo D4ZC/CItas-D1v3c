@@ -1,9 +1,9 @@
 import React, {useState,useContext} from 'react';
-import { View, Button, Text, StyleSheet ,Alert} from 'react-native'
+import { View,Text, StyleSheet ,Alert} from 'react-native'
 import {TextInput} from 'react-native-paper';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import RNPickerSelect from 'react-native-picker-select';
-
+import { Button }  from 'react-native-paper';
 import FirebaseContext from '../../context/firebase/firebaseContext';
 import UserContext from '../../context/user/userContext'
 
@@ -123,13 +123,18 @@ const CalendarPicker = () => {
             {/* <Text>{centro} -  {carrera }</Text> */}
           </View>
             <View>
-              <Button title="Seleccionar día" onPress={showDatePicker} />
+              <Button style={styles.fechaBtn}
+               title="Seleccionar Fecha" onPress={showDatePicker} >
+               <Text style={styles.textoCita}>Seleccionar Fecha</Text>
+               </Button>
+               <Text style={styles.textoCita2}>Selecciona una hora</Text>
               <DateTimePickerModal
                   isVisible={isDatePickerVisible}
                   mode="date"
                   onConfirm={confirmarFecha}
                   onCancel={hideDatePicker}
                   locale='es_ES'  
+                  
               />
             </View>
             {horasItems&&(
@@ -137,6 +142,7 @@ const CalendarPicker = () => {
                 style={{height: 50, width: 100}}
                 onValueChange={(itemValue, itemIndex) =>setTime(itemValue)}
                 items={horasItems}
+                
               />)}
             
         </View>
@@ -144,30 +150,32 @@ const CalendarPicker = () => {
         <View>
 
           <View style={styles.containerDate}>
-            { date ? (<Text style={styles.title}>Cita agendada para el dia: </Text>) 
-                  : (<Text style={styles.titleNothing}>Aun no se ha seleccionado una fecha</Text>) }
+            { date ? (<Text style={styles.title}>Fecha seleccionada: </Text>) 
+                  : (<Text style={styles.titleNothing}>Fecha no seleccionada</Text>) }
             {/* <Text>{date.getDate()} del mes { date.getMonth()} </Text> */}
             <Text style={styles.titleInfo}>{date.toString()}</Text>
             
-            { time ? (<Text style={styles.title}>A la hora: </Text>) 
-                  : (<Text style={styles.titleNothing}>Aun no se ha seleccionado un horario</Text>) }
+            { time ? (<Text style={styles.title}>Hora: </Text>) 
+                  : (<Text style={styles.titleNothing}>Horario no seleccionado</Text>) }
             <Text style={styles.titleInfo}>{time}</Text>
           </View>
           
-          
+          {/* Hay que verificar si cierra el teclado en otros dispositivos */}
           <TextInput 
-            label="Asunto"
+            label="Asunto:"
             multiline={true}
             numberOfLines={3}
-            placeholder="Titulación"
+            placeholder="Escribe tu asunto aqui:"
             // value={subject}
             onChangeText={text=>setSubject(text)}
           />
 
-          <Button
-            title="Confirmar cita"
-            onPress={ () => confirmarCita() }            
-          />
+          <Button style={styles.citaBtn}
+             
+            onPress={ () => confirmarCita() }   
+          >
+          <Text style={styles.textoCita}>Confirmar Cita</Text>
+          </Button>
         </View>
         </>
     );
@@ -184,16 +192,25 @@ const CalendarPicker = () => {
     justifyContent: 'center',
     alignItems: 'center',
     width:'90%',
-    backgroundColor:'white',
-    borderColor:'black',
-    borderWidth:3,
-    borderRadius:3,
+    backgroundColor:'#077070',
+    borderColor:'white',
+    borderWidth:1,
+    borderRadius:10,
     margin:20
   },
   title:{
     fontWeight:'bold',
     fontSize:24,
-    textAlign:'center'
+    textAlign:'center',
+    color:'white'
+  },
+  textoCita:{
+    color:"white"
+  },
+  textoCita2:{
+    color:"black",
+    right: 100,
+    top: 10
   },
   titleInfo:{     
     fontSize:22,
@@ -205,6 +222,25 @@ const CalendarPicker = () => {
     textAlign:'center',
     margin:10
 
+  },
+  citaBtn:{
+    width:"60%",
+    backgroundColor:"#055A5A",
+    borderRadius:30,
+    height:50,
+    left: 80,
+    top:40,
+    alignItems:"center",
+    justifyContent:"center",
+  },
+  fechaBtn:{
+    width:"80%",
+    top:10,
+    backgroundColor:"#018D8D",
+    borderRadius:10,
+    height:50,
+    alignItems:"center",
+    justifyContent:"center",
   }
  })
 export default CalendarPicker;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState,useContext} from 'react';
 import { View, StyleSheet } from 'react-native';
 import {
     useTheme,
@@ -17,11 +17,19 @@ import {
 } from '@react-navigation/drawer';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import FirebaseContext from '../../context/firebase/firebaseContext';
+import UserContext from '../../context/user/userContext'
+
+
 
 
 // import{ AuthContext } from '../components/context';
 
 export function DrawerContent(props) {
+    const {carrera,nombre,codigo,centro} = useContext(UserContext)
+    const {firebase} = useContext(FirebaseContext); 
+    
+
     const [isDarkTheme, setIsDarkTheme] = React.useState(false);
 
     const toogleTheme = () => {
@@ -44,19 +52,20 @@ export function DrawerContent(props) {
                                 size={50}
                             />
                             <View style={{marginLeft:15, flexDirection:'column'}}>
-                                <Title style={styles.title}>CITAS D1V3C</Title>
-                                <Caption style={styles.caption}>Powered by: CUCEI MOBILE</Caption>
+                                <Title style={styles.title}>{nombre}</Title>
+                                  
+                                <Caption style={styles.caption}>Alumno: {codigo}</Caption>
                             </View>
                         </View>
 
                         <View style={styles.row}>
                             <View style={styles.section}>
-                                <Paragraph style={[styles.paragraph, styles.caption]}>Ing</Paragraph>
-                                <Caption style={styles.caption}>Computacion</Caption>
+                                <Paragraph style={[styles.paragraph, styles.caption]}>Centro: </Paragraph>
+                                <Caption style={styles.caption}>{centro}</Caption>
                             </View>
                             <View style={styles.section}>
-                                <Paragraph style={[styles.paragraph, styles.caption]}>Ing</Paragraph>
-                                <Caption style={styles.caption}>Informatica</Caption>
+                                <Paragraph style={[styles.paragraph, styles.caption]}>Carrera</Paragraph>
+                                <Caption style={styles.caption}>:{carrera}</Caption>
                             </View>
                             
                         </View>
@@ -156,7 +165,7 @@ const styles = StyleSheet.create({
       paddingLeft: 20,
     },
     title: {
-      fontSize: 16,
+      fontSize:20,
       marginTop: 3,
       fontWeight: 'bold',
     },
