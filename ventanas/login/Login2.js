@@ -71,19 +71,21 @@ export default  Login = () => {
     //Si no es de Cucei
     if(myArray[3] != 'CUCEI' ){
       console.log("No Cucei")
+      Alert.alert("Acceso de negado","Lo sentimos por ahora solo pueden acceder usuario de CUCEI")
     }    
-    const user = {
-        nombre:myArray[2],
-        codigo:myArray[1],
-        centro:myArray[3],
-        carrera:myArray[4]
+    else {
+      const user = {
+          nombre:myArray[2],
+          codigo:myArray[1],
+          centro:myArray[3],
+          carrera:myArray[4]
+      }
+      
+      addUser(user)
+      navigation.navigate("HomeDrawer")
+      //Navegar a la siguiente ventana
+      //navigation.navigate("registro")
     }
-    
-    addUser(user)
-    navigation.navigate("Home")
-    //Navegar a la siguiente ventana
-    //navigation.navigate("registro")
-
   }
 
     

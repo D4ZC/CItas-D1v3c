@@ -129,7 +129,7 @@ const CalendarPicker = () => {
                   mode="date"
                   onConfirm={confirmarFecha}
                   onCancel={hideDatePicker}
-                  locale='es_ES'
+                  locale='es_ES'  
               />
             </View>
             {horasItems&&(
