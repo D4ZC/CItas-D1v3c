@@ -6,7 +6,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 // -------------------------Ventanas--------------------------------
-import Login from '../login/Login2';
 import Calendario from '../Calendar/calendario';
 import HomeScreen from '../HomeScreen/home';
 import DetailsScreen from '../DetailScreen/detail';
@@ -101,14 +100,7 @@ const HomeStackScreen = ({navigation}) => (
       headerTitleStyle: {
         fontWeight: 'bold'
       }
-    }}>
-       <HomeStack.Screen name="Login" component={Login} options = {{
-        title: 'CITAS DIVEC',
-        headerMode: 'none', 
-        headerShown: false
-
-        
-      }}/>
+    }}>       
       <HomeStack.Screen name="Home" component={HomeScreen} options = {{
         title: 'CITAS DIVEC',
         headerLeft: () => (

@@ -8,11 +8,15 @@ import MainTabScreen from './ventanas/MainTabScreen/MainTabScreen';
 
 import { DrawerContent} from './ventanas/DrawContent/DrawContent';
 import ComentariosScreen from './ventanas/Comentarios/comentario';
+import Login from './ventanas/login/Login2'
 
 import UserState from './context/user/userState';
 import FirebaseState from './context/firebase/firebaseState' ;
 
+import { createStackNavigator } from '@react-navigation/stack';
+
 const Drawer = createDrawerNavigator();
+const stack = createStackNavigator();
 
 // --------------------------Inicial --------------------------------
 function App() {
@@ -20,7 +24,9 @@ function App() {
     <FirebaseState>
       <UserState>
         <NavigationContainer>
+          
           <Drawer.Navigator drawerContent = {props => <DrawerContent {... props} />}>
+            <Drawer.Screen name="Login" component={Login}/>
             <Drawer.Screen name="HomeDrawer" component={MainTabScreen} />
             <Drawer.Screen name="ComentariosDrawer" component={ComentariosScreen} />
             {/* <Drawer.Screen name="SoporteScreen" component={SoporteScreen} /> */}

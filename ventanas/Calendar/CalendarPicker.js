@@ -129,7 +129,7 @@ const CalendarPicker = () => {
                   mode="date"
                   onConfirm={confirmarFecha}
                   onCancel={hideDatePicker}
-                  locale='es_ES'
+                  locale='es_ES'  
               />
             </View>
             {horasItems&&(
@@ -159,8 +159,7 @@ const CalendarPicker = () => {
             label="Asunto"
             multiline={true}
             numberOfLines={3}
-            placeholder="Titulación"
-            value={subject}
+            placeholder="Titulación"            
             onChangeText={text=>setSubject(text)}
           />
 
