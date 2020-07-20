@@ -1,9 +1,9 @@
 import React, {useState,useContext} from 'react'; // Hooks para estado y contexto
-import { View, Button, Text, StyleSheet ,Alert} from 'react-native'
+import { View, Text, StyleSheet ,Alert} from 'react-native'
 import {TextInput} from 'react-native-paper';
 import DateTimePickerModal from "react-native-modal-datetime-picker"; //comp. para seleccionar dia
 import RNPickerSelect from 'react-native-picker-select'; // comp para seleccionar la hora disponible
-
+import { Button }  from 'react-native-paper';
 import FirebaseContext from '../../context/firebase/firebaseContext'; // Contexto para acceder a firestore
 import UserContext from '../../context/user/userContext'// contexto para acceder a la info del usuario
 
