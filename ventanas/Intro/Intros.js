@@ -7,7 +7,7 @@ import UserContext from '../../context/user/userContext';
 
 const Intro = () => {
     
-    const navigation = useNavigation();
+    const navigation = useNavigation(); //Hook de navegación
 
 
     const { addUser}  = useContext(UserContext); //Agregar los datos al context
