@@ -4,12 +4,12 @@ const Cita = ({cita}) => {
         console.log(cita)
     const {nombre,codigo,date,time,centro,carrera,subject} = cita
     
-    // const dia = new Date(date*1000).toLocaleDateString("es-ES")
+     const dia = new Date(date*1000)
      
     return ( 
         <>            
             <View style={styles.container}>
-                {/* <Text> Fecha: {dia} </Text> */}
+                <Text> Fecha: {dia.getDay()} - {dia.getMonth()+1} - {dia.getFullYear()}  </Text>
                 <Text>Hora: {time} </Text>
                 <Text>Nombre: {nombre}</Text>
                 <Text>Código: {codigo}</Text>
