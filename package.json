@@ -21,6 +21,7 @@
     "@react-navigation/stack": "^5.6.2",
     "base-64": "^0.1.0",
     "firebase": "^7.16.1",
+    "lodash": "^4.17.19",
     "react": "16.11.0",
     "react-native": "0.62.2",
     "react-native-calendars": "^1.300.0",
