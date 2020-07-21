@@ -1,13 +1,18 @@
 import React, {useState,useContext} from 'react'; // Hooks para estado y contexto
-import { View, Text, StyleSheet ,Alert} from 'react-native'
+import { View, Text, StyleSheet ,Alert,TouchableOpacity} from 'react-native'
 import {TextInput} from 'react-native-paper';
 import DateTimePickerModal from "react-native-modal-datetime-picker"; //comp. para seleccionar dia
 import RNPickerSelect from 'react-native-picker-select'; // comp para seleccionar la hora disponible
-import { Button }  from 'react-native-paper';
+import { Button, Avatar }  from 'react-native-paper';
 import FirebaseContext from '../../context/firebase/firebaseContext'; // Contexto para acceder a firestore
 import UserContext from '../../context/user/userContext'// contexto para acceder a la info del usuario
 
 import {citasRepetidas} from '../../utils/functions'; // // Recibe el arreglo de todas las citas de un dia y regresa un arreglo con las horas que ya se han repetido 3 veces
+
+import Icon from 'react-native-vector-icons/FontAwesome';
+
+import Calendario from '../../UI/calendarioUI';
+import Reloj from '../../UI/relojUI';
 
 const CalendarPicker = () => {
 
@@ -32,6 +37,7 @@ const CalendarPicker = () => {
       setDate(dia)
       hideDatePicker();
       agregarItemsElements()
+      console.log(dia.getDate())
     };
 
     const itemsDefault = [     
@@ -125,9 +131,31 @@ const CalendarPicker = () => {
             {/* <Text>{centro} -  {carrera }</Text> */}
           </View>
             <View>
+            <TouchableOpacity
+              onPress={showDatePicker}>
+              <Calendario />
+            </TouchableOpacity>
+            <TouchableOpacity
+            onPress={()=>{Alert.alert("Si sirve","Aqui entro")}}>
+              <Reloj >
+              {horasItems&&(
+              <RNPickerSelect                               
+                style={{height: 50, width: 100}}
+                onValueChange={(itemValue, itemIndex) =>setTime(itemValue)}
+                items={horasItems}
+                
+              />)}
+              </Reloj>
+              
+            </TouchableOpacity>
               <Button style={styles.fechaBtn}
                title="Seleccionar Fecha" onPress={showDatePicker} >
-               <Text style={styles.textoCita}>Seleccionar Fecha</Text>
+               <Icon
+                  name="calendar"
+                  color="white"
+                  style={{fontSize:40}}
+                ></Icon>
+               <Text style={styles.textoCita}>Seleccionar Fecha</Text>               
                </Button>
                <Text style={styles.textoCita2}>Selecciona una hora</Text>
               <DateTimePickerModal
@@ -139,16 +167,11 @@ const CalendarPicker = () => {
                   
               />
             </View>
-            {horasItems&&(
-              <RNPickerSelect                               
-                style={{height: 50, width: 100}}
-                onValueChange={(itemValue, itemIndex) =>setTime(itemValue)}
-                items={horasItems}
-                
-              />)}
+            
             
         </View>
-
+        {/* <Avatar.Text size={48} label={date.getDate()}/> */}
+              
         <View>
           <View style={styles.containerDate}>
             { date ? (<Text style={styles.title}>Fecha seleccionada: </Text>) 

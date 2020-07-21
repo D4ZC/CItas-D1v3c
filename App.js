@@ -10,11 +10,14 @@ import { DrawerContent} from './ventanas/DrawContent/DrawContent';
 import ComentariosScreen from './ventanas/Comentarios/comentario';
 import Login from './ventanas/login/Login2'
 import Intro from './ventanas/Intro/Intros';
+import Calendario from './UI/calendarioUI';
+import CalendarRNP from './ventanas/Calendar/CalendarPicker'
 
 import UserState from './context/user/userState';
 import FirebaseState from './context/firebase/firebaseState' ;
 
 import { createStackNavigator, HeaderTitle } from '@react-navigation/stack';
+import RelojUI from './UI/relojUI';
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -44,8 +47,7 @@ function App() {
             <Stack.Screen 
               name="HomeDrawer"component={TheDrawer} options={{headerMode: 'none', headerShown: false}} 
             />
-          </Stack.Navigator>
-          
+          </Stack.Navigator>          
         </NavigationContainer>
       </UserState>
     </FirebaseState>
