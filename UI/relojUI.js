@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     },
     time:{
         color:'#707070',
-        fontSize:80,
+        fontSize:60,
         marginHorizontal:5
     }
 })

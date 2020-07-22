@@ -13,6 +13,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import Calendario from '../../UI/calendarioUI';
 import Reloj from '../../UI/relojUI';
+import 'intl';
+import 'intl/locale-data/jsonp/es';
 
 const CalendarPicker = () => {
 
@@ -222,10 +224,10 @@ const CalendarPicker = () => {
 
  const styles = StyleSheet.create({
   container:{    
-    justifyContent:'center',
+    justifyContent:'space-evenly',
     alignItems:'center',
     backgroundColor:'#005858',
-
+    flex:4
   },
   title:{
     fontWeight:'bold',
@@ -250,12 +252,10 @@ const CalendarPicker = () => {
     width:"80%",
     backgroundColor:"#FFE232",
     borderRadius:30,
-    height:60,    
+    height:40,    
     alignItems:"center",
     justifyContent:"center",
-    alignSelf:"center",    
-    marginTop:30,
-    marginBottom:10
+    alignSelf:"center",        
     
   },
 
@@ -264,18 +264,19 @@ const CalendarPicker = () => {
   },
   containerBottom:{
     flex:1,
-    justifyContent:"flex-end",
+    justifyContent:"space-around",
     // alignItems:"center",    
   },
   calendario:{
-    marginVertical:30,
+    // marginVertical:30,
 
   },
   inputAsunto:{
-    marginBottom:20
+    // marginBottom:20
   },
   containerInputAsunto:{
-    marginHorizontal:20
+    marginHorizontal:20,
+    minWidth:200
   }
  })
 export default CalendarPicker;

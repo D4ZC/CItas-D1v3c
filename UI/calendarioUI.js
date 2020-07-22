@@ -26,10 +26,10 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         alignItems:'center',            
         minWidth:'30%',
-        minWidth:170,
+        minWidth:150,
     },
     topCalendar:{        
-        minWidth:170,
+        minWidth:150,
         minHeight:20,        
         backgroundColor:"#FFE232",
         width:"100%"
@@ -38,8 +38,8 @@ const styles = StyleSheet.create({
     },
     blankCalendar:{
         width:"100%",
-        minWidth:170,
-        minHeight:150,
+        minWidth:150,
+        minHeight:130,
         backgroundColor:'white',        
         maxHeight:'80%',
         justifyContent:'center',
