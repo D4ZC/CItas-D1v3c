@@ -1,7 +1,9 @@
 import React from 'react';
 import { View , StyleSheet} from 'react-native'
 import {Text} from 'react-native-paper'
-const CalendarioUI = () => {
+const CalendarioUI = ({dia, mes}) => {
+    console.log(dia)
+    console.log(mes)
     return ( 
         <>
             <View style={styles.container}>                
@@ -9,9 +11,9 @@ const CalendarioUI = () => {
                         
                 </View>
                 <View style={styles.blankCalendar}>
-                    <Text style={styles.number}>12</Text>
-                    <Text style={styles.month}>Septiembre</Text>
-                </View>
+                    <Text style={styles.number}>{dia}</Text>
+                    <Text style={styles.month}>{mes}</Text>
+                </View> 
             </View>            
             
         </>
@@ -22,25 +24,27 @@ const styles = StyleSheet.create({
     container:{
         minHeight:'20%',
         justifyContent:'center',
-        alignItems:'center',
-        
-        minWidth:'30%'
-    },
-    topCalendar:{
+        alignItems:'center',            
+        minWidth:'30%',
         minWidth:170,
-        minHeight:20,
-        maxHeight:'20%',
+    },
+    topCalendar:{        
+        minWidth:170,
+        minHeight:20,        
         backgroundColor:"#FFE232",
+        width:"100%"
+        
         
     },
     blankCalendar:{
+        width:"100%",
         minWidth:170,
         minHeight:150,
         backgroundColor:'white',        
         maxHeight:'80%',
         justifyContent:'center',
         alignItems:'center',
-
+        paddingHorizontal:5
     },
     number:{
         fontSize:60,

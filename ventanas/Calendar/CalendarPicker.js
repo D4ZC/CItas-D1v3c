@@ -1,5 +1,5 @@
 import React, {useState,useContext} from 'react'; // Hooks para estado y contexto
-import { View, Text, StyleSheet ,Alert,TouchableOpacity} from 'react-native'
+import { View, Text, StyleSheet ,Alert,TouchableOpacity, ScrollView} from 'react-native'
 import {TextInput} from 'react-native-paper';
 import DateTimePickerModal from "react-native-modal-datetime-picker"; //comp. para seleccionar dia
 import RNPickerSelect from 'react-native-picker-select'; // comp para seleccionar la hora disponible
@@ -122,42 +122,66 @@ const CalendarPicker = () => {
         // console.log(horasItems)
     }
 
-
+    const dayCalendarRender = () => {
+      if(date){
+        return date.getDate().toString()
+      }
+      else {
+        return "0"
+      }
+    }
+    const monthCalendarRender = () => {
+      if(date){
+        var options = { month: 'long'};
+        const mes = new Intl.DateTimeFormat('es-ES', options).format(date)
+        return mes.toString()
+      }
+      else {
+        return "Seleccione el día"
+      }
+    }
+    const timeClockRender = () => {
+      if(time){
+        const hora = time.substr(0,2)
+        const minutos = time.substr(2,4)
+        return hora+":"+minutos
+      }
+      else{
+        return "00:00"
+      }
+    }
     return (  
-        <>
+        <View style={{backgroundColor:"#005858",flex:1}}>        
         <View style={styles.container}>
+        
           <View>
-            {/* <Text>{nombre } - {codigo}</Text> */}
-            {/* <Text>{centro} -  {carrera }</Text> */}
+            {/* <Text style={styles.title}>Agenda tu cita</Text> */}
           </View>
             <View>
-            <TouchableOpacity
-              onPress={showDatePicker}>
-              <Calendario />
-            </TouchableOpacity>
-            <TouchableOpacity
-            onPress={()=>{Alert.alert("Si sirve","Aqui entro")}}>
-              <Reloj >
+              <View style={styles.calendario}>
+                <TouchableOpacity
+                  onPress={showDatePicker}>
+                    <Calendario 
+                    dia={dayCalendarRender()}                
+                    mes={monthCalendarRender()}
+                    // mes ={new Intl.DateTimeFormat('es-ES', date).format(Xmas95)}
+                  />
+                
+                </TouchableOpacity>            
+              </View>
+              <Reloj 
+                time={timeClockRender()}
+               >
               {horasItems&&(
               <RNPickerSelect                               
-                style={{height: 50, width: 100}}
+                style={styles.pickerSelectHour}
                 onValueChange={(itemValue, itemIndex) =>setTime(itemValue)}
                 items={horasItems}
                 
               />)}
               </Reloj>
               
-            </TouchableOpacity>
-              <Button style={styles.fechaBtn}
-               title="Seleccionar Fecha" onPress={showDatePicker} >
-               <Icon
-                  name="calendar"
-                  color="white"
-                  style={{fontSize:40}}
-                ></Icon>
-               <Text style={styles.textoCita}>Seleccionar Fecha</Text>               
-               </Button>
-               <Text style={styles.textoCita2}>Selecciona una hora</Text>
+                          
               <DateTimePickerModal
                   isVisible={isDatePickerVisible}
                   mode="date"
@@ -167,32 +191,22 @@ const CalendarPicker = () => {
                   
               />
             </View>
-            
-            
+                        
         </View>
-        {/* <Avatar.Text size={48} label={date.getDate()}/> */}
-              
-        <View>
-          <View style={styles.containerDate}>
-            { date ? (<Text style={styles.title}>Fecha seleccionada: </Text>) 
-                  : (<Text style={styles.titleNothing}>Fecha no seleccionada</Text>) }
-            {/* <Text>{date.getDate()} del mes { date.getMonth()} </Text> */}
-            <Text style={styles.titleInfo}>{date.toString()}</Text>
-            
-            { time ? (<Text style={styles.title}>Hora: </Text>) 
-                  : (<Text style={styles.titleNothing}>Horario no seleccionado</Text>) }
-            <Text style={styles.titleInfo}>{time}</Text>
-          </View>
-          
+
+        <View style={styles.containerBottom}>
           {/* Hay que verificar si cierra el teclado en otros dispositivos */}
-          <TextInput 
-            label="Asunto:"
-            multiline={true}
-            numberOfLines={3}
-            placeholder="Escribe tu asunto aqui:"
-            // value={subject}
-            onChangeText={text=>setSubject(text)}
-          />
+          <View style={styles.containerInputAsunto}>
+            <TextInput 
+              style={styles.inputAsunto}
+              label="Asunto:"
+              multiline={true}
+              numberOfLines={3}
+              placeholder="Escribe tu asunto aqui:"
+              // value={subject}
+              onChangeText={text=>setSubject(text)}
+            />
+          </View>
 
           <Button style={styles.citaBtn}
              
@@ -201,26 +215,17 @@ const CalendarPicker = () => {
           <Text style={styles.textoCita}>Confirmar Cita</Text>
           </Button>
         </View>
-        </>
+                
+        </View>
     );
 }
 
  const styles = StyleSheet.create({
   container:{    
     justifyContent:'center',
-    alignItems:'center'
-  },
-  containerDate:{
-    alignSelf:'center',
-    height:250,
-    justifyContent: 'center',
-    alignItems: 'center',
-    width:'90%',
-    backgroundColor:'#077070',
-    borderColor:'white',
-    borderWidth:1,
-    borderRadius:10,
-    margin:20
+    alignItems:'center',
+    backgroundColor:'#005858',
+
   },
   title:{
     fontWeight:'bold',
@@ -229,17 +234,11 @@ const CalendarPicker = () => {
     color:'white'
   },
   textoCita:{
-    color:"white"
-  },
-  textoCita2:{
     color:"black",
-    right: 100,
-    top: 10
+    fontSize:24
+
   },
-  titleInfo:{     
-    fontSize:22,
-    textAlign:'center'
-  },
+
   titleNothing:{
     color:'red',
     fontSize:23,
@@ -248,23 +247,35 @@ const CalendarPicker = () => {
 
   },
   citaBtn:{
-    width:"60%",
-    backgroundColor:"#055A5A",
-    borderRadius:30,
-    height:50,
-    left: 80,
-    top:40,
-    alignItems:"center",
-    justifyContent:"center",
-  },
-  fechaBtn:{
     width:"80%",
-    top:10,
-    backgroundColor:"#018D8D",
-    borderRadius:10,
-    height:50,
+    backgroundColor:"#FFE232",
+    borderRadius:30,
+    height:60,    
     alignItems:"center",
     justifyContent:"center",
+    alignSelf:"center",    
+    marginTop:30,
+    marginBottom:10
+    
+  },
+
+  pickerSelectHour:{                
+    //Componente picker
+  },
+  containerBottom:{
+    flex:1,
+    justifyContent:"flex-end",
+    // alignItems:"center",    
+  },
+  calendario:{
+    marginVertical:30,
+
+  },
+  inputAsunto:{
+    marginBottom:20
+  },
+  containerInputAsunto:{
+    marginHorizontal:20
   }
  })
 export default CalendarPicker;

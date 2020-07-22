@@ -5,7 +5,7 @@ import Calendar from './calendarioUI';
 
 
 const RelojUI = (props) => {
-    
+    const {time} = props
 
     return ( 
         <>
@@ -13,10 +13,11 @@ const RelojUI = (props) => {
             {/* <Avatar.Text size={400} label="12" style={styles.avatar} /> */}
             
             <View style={styles.circle}>
-                <Text style={styles.time}>12:00</Text>
+                <Text style={styles.time}>{time}</Text>
+                {props.children}
+            </View>                     
             </View>
-            </View>
-            {props.children}
+            
         </>
      );
 }
@@ -28,7 +29,8 @@ const styles = StyleSheet.create({
         alignItems:'center',
         // backgroundColor:'#005858',
         width:"100%",
-        minHeight:250,             
+        minHeight:250,            
+        // position:"absolute" 
     } ,    
     circle:{        
         width:"100%",
@@ -37,7 +39,8 @@ const styles = StyleSheet.create({
         alignItems:'center',
         justifyContent:'center',
         borderColor:'#018D8D',
-        borderWidth:10
+        borderWidth:4,
+        padding:8
     },
     time:{
         color:'#707070',
