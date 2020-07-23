@@ -154,69 +154,71 @@ const CalendarPicker = () => {
     }
     return (  
         <View style={{backgroundColor:"#005858",flex:1}}>        
-        <View style={styles.container}>
-        
-          <View>
-            {/* <Text style={styles.title}>Agenda tu cita</Text> */}
-          </View>
+          <View style={styles.container}>
+          
             <View>
-              <View style={styles.calendario}>
-                <TouchableOpacity
-                  onPress={showDatePicker}>
-                    <Calendario 
-                    dia={dayCalendarRender()}                
-                    mes={monthCalendarRender()}
-                    // mes ={new Intl.DateTimeFormat('es-ES', date).format(Xmas95)}
-                  />
-                
-                </TouchableOpacity>            
-              </View>
-              <Reloj 
-                time={timeClockRender()}
-               >
-              {horasItems&&(
-              <RNPickerSelect                               
-                style={styles.pickerSelectHour}
-                onValueChange={(itemValue, itemIndex) =>setTime(itemValue)}
-                items={horasItems}
-                
-              />)}
-              </Reloj>
-              
-                          
-              <DateTimePickerModal
-                  isVisible={isDatePickerVisible}
-                  mode="date"
-                  onConfirm={confirmarFecha}
-                  onCancel={hideDatePicker}
-                  locale='es_ES'  
+              {/* <Text style={styles.title}>Agenda tu cita</Text> */}
+            </View>
+              <View style={{alignItems:"center",justifyContent:"space-evenly",flex:1}}>
+                <View style={styles.calendario}>
+                  <TouchableOpacity
+                    onPress={showDatePicker}>
+                      <Calendario 
+                      dia={dayCalendarRender()}                
+                      mes={monthCalendarRender()}
+                      // mes ={new Intl.DateTimeFormat('es-ES', date).format(Xmas95)}
+                    />
                   
+                  </TouchableOpacity>            
+                </View>
+                <Reloj 
+                  time={timeClockRender()}                
+                >
+                {horasItems&&(
+                <RNPickerSelect                               
+                  style={styles.pickerSelectHour}
+                  onValueChange={(itemValue, itemIndex) =>setTime(itemValue)}
+                  items={horasItems}
+                  
+                />)}
+                </Reloj>
+                
+                            
+                <DateTimePickerModal
+                    isVisible={isDatePickerVisible}
+                    mode="date"
+                    onConfirm={confirmarFecha}
+                    onCancel={hideDatePicker}
+                    locale='es_ES'  
+                    
+                />
+                
+              </View>
+                          
+          </View> 
+            {/**Fin container top **/}
+
+          <View style={styles.containerBottom}> 
+            {/* Hay que verificar si cierra el teclado en otros dispositivos */}
+            <View style={styles.containerInputAsunto}>
+              <TextInput 
+                style={styles.inputAsunto}
+                label="Asunto:"
+                multiline={true}
+                numberOfLines={3}
+                placeholder="Escribe tu asunto aqui:"
+                // value={subject}
+                onChangeText={text=>setSubject(text)}
               />
             </View>
-                        
-        </View>
 
-        <View style={styles.containerBottom}>
-          {/* Hay que verificar si cierra el teclado en otros dispositivos */}
-          <View style={styles.containerInputAsunto}>
-            <TextInput 
-              style={styles.inputAsunto}
-              label="Asunto:"
-              multiline={true}
-              numberOfLines={3}
-              placeholder="Escribe tu asunto aqui:"
-              // value={subject}
-              onChangeText={text=>setSubject(text)}
-            />
+            <Button style={styles.citaBtn}
+              
+              onPress={ () => confirmarCita() }   
+            >
+            <Text style={styles.textoCita}>Confirmar Cita</Text>
+            </Button>
           </View>
-
-          <Button style={styles.citaBtn}
-             
-            onPress={ () => confirmarCita() }   
-          >
-          <Text style={styles.textoCita}>Confirmar Cita</Text>
-          </Button>
-        </View>
                 
         </View>
     );
@@ -224,10 +226,12 @@ const CalendarPicker = () => {
 
  const styles = StyleSheet.create({
   container:{    
-    justifyContent:'space-evenly',
+    justifyContent:'center',
     alignItems:'center',
     backgroundColor:'#005858',
-    flex:4
+    // backgroundColor:'blue',
+    flex:4,
+    
   },
   title:{
     fontWeight:'bold',
@@ -263,9 +267,10 @@ const CalendarPicker = () => {
     //Componente picker
   },
   containerBottom:{
-    flex:1,
+    flex:2,
     justifyContent:"space-around",
     // alignItems:"center",    
+    // backgroundColor:"red"
   },
   calendario:{
     // marginVertical:30,

@@ -12,10 +12,10 @@ const RelojUI = (props) => {
             <View style={styles.container}>
             {/* <Avatar.Text size={400} label="12" style={styles.avatar} /> */}
             
-            <View style={styles.circle}>
-                <Text style={styles.time}>{time}</Text>
-                {props.children}
-            </View>                     
+                <View style={styles.circle}>
+                    <Text style={styles.time}>{time}</Text>
+                    {props.children}
+                </View>                     
             </View>
             
         </>
@@ -27,9 +27,9 @@ const styles = StyleSheet.create({
         // flex:1,
         justifyContent:'center',
         alignItems:'center',
-        // backgroundColor:'#005858',
+        // backgroundColor:'red',
         width:"100%",
-        minHeight:250,            
+        minHeight:120,            
         // position:"absolute" 
     } ,    
     circle:{        

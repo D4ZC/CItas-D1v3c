@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
         alignItems:'center',            
         minWidth:'30%',
         minWidth:150,
+        // backgroundColor:"orange",        
     },
     topCalendar:{        
         minWidth:150,
