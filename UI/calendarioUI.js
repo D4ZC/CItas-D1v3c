@@ -2,8 +2,8 @@ import React from 'react';
 import { View , StyleSheet} from 'react-native'
 import {Text} from 'react-native-paper'
 const CalendarioUI = ({dia, mes}) => {
-    console.log(dia)
-    console.log(mes)
+    // console.log(dia)
+    // console.log(mes)
     return ( 
         <>
             <View style={styles.container}>                

@@ -6,6 +6,7 @@ import RNPickerSelect from 'react-native-picker-select'; // comp para selecciona
 import { Button, Avatar }  from 'react-native-paper';
 import FirebaseContext from '../../context/firebase/firebaseContext'; // Contexto para acceder a firestore
 import UserContext from '../../context/user/userContext'// contexto para acceder a la info del usuario
+import Toast from 'react-native-simple-toast';
 
 import {citasRepetidas} from '../../utils/functions'; // // Recibe el arreglo de todas las citas de un dia y regresa un arreglo con las horas que ya se han repetido 3 veces
 
@@ -16,7 +17,7 @@ import Reloj from '../../UI/relojUI';
 import 'intl';
 import 'intl/locale-data/jsonp/es';
 
-const CalendarPicker = () => {
+const CalendarPicker = (props) => {
 
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);    
     const [date,setDate] = useState('')
@@ -39,7 +40,7 @@ const CalendarPicker = () => {
       setDate(dia)
       hideDatePicker();
       agregarItemsElements()
-      console.log(dia.getDate())
+      // console.log(dia.getDate())
     };
 
     const itemsDefault = [     
@@ -85,9 +86,14 @@ const CalendarPicker = () => {
       try{
        const cite = await firebase.db.collection("cita").add(cita)
         .then(refDoc => {
-          console.log(`ID Document ${refDoc}`)
-        }).catch(error=>{console.log(error)})     
-        // console.log(cite)   
+          // console.log(`La cita fue correctamente agregada ${refDoc}`)
+          Toast.show("La cita ha sido agregada correctamente")
+          props.navigation.navigate('Explore')
+        }).catch(error=>{
+          console.log(error) 
+          Toast.show("Ocurrió algún error intenté más tarde",Toast.LONG)
+        })     
+          
       }catch(e){
         console.log(e)
       }
@@ -157,7 +163,7 @@ const CalendarPicker = () => {
           <View style={styles.container}>
           
             <View>
-              {/* <Text style={styles.title}>Agenda tu cita</Text> */}
+              <Text style={styles.title}>Agenda tu cita</Text>
             </View>
               <View style={{alignItems:"center",justifyContent:"space-evenly",flex:1}}>
                 <View style={styles.calendario}>
@@ -190,7 +196,8 @@ const CalendarPicker = () => {
                     onConfirm={confirmarFecha}
                     onCancel={hideDatePicker}
                     locale='es_ES'  
-                    
+                    minimumDate={new Date()}
+                    value={new Date()}
                 />
                 
               </View>
@@ -235,9 +242,10 @@ const CalendarPicker = () => {
   },
   title:{
     fontWeight:'bold',
-    fontSize:24,
+    fontSize:28,
     textAlign:'center',
-    color:'white'
+    color:'white',
+    marginTop:20
   },
   textoCita:{
     color:"black",
